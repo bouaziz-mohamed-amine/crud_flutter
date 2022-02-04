@@ -1,28 +1,35 @@
+import 'package:crud_flutter/provider/category_provider.dart';
 import 'package:crud_flutter/provider/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class ProductsController extends GetxController{
+class CategoriesController extends GetxController{
 
   ProductProvider productProvider = ProductProvider();
+  CategoryProvider categoryProvider=CategoryProvider();
   var products = [].obs;
-  var selected="amine".obs;
-  final productTitleController = TextEditingController();
-  var product="".obs;
+  var selected=1.obs;
+  var categories=[].obs;
   var last_page=0.obs;
   var current_page=1.obs;
-
   @override
   void onInit() async {
     // TODO: implement onInit
+    //last_page.value=amine["meta"]["last_page"];
     await fetchAllProducts(current_page.value);
-    print(products.value.length.toString());
+    await fetchAllCategories();
+    //print(categories.value.length.toString());
     super.onInit();
   }
 
   Future<void> fetchAllProducts(int page) async {
     var data= await productProvider.getAllProducts(page);
     products.value=data["products"];
+    //print(products.length);
     last_page.value=data["total"];
+  }
+  Future<void> fetchAllCategories() async {
+    categories.value= await categoryProvider.getAllCategories();
+    print(categories.value.length);
   }
 
   Future<void> deleleProduct(int id)async {
@@ -31,19 +38,9 @@ class ProductsController extends GetxController{
     products.value=data["products"];
 
   }
-
-  void onChanged(String value) {
-    selected.value=value.toString();
+  Future<void> onChanged(String value) async {
+    selected.value=int.parse(value);
+    products.value= await categoryProvider.getProductsByCategory(value);
   }
 
-   Future<void> selectProducts() async{
-      if(productTitleController.text!=""){
-        String name=productTitleController.text;
-        products.value= await productProvider.getAllProductsByName(name);
-      }
-  }
-
-  void changeCurrentPage(int i) {
-    current_page.value= i ;
-  }
 }

@@ -1,5 +1,6 @@
 import 'package:crud_flutter/controller/new_product_controller.dart';
 import 'package:crud_flutter/controller/productscontroller.dart';
+import 'package:crud_flutter/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class NewProduct extends StatelessWidget{
@@ -7,7 +8,6 @@ class NewProduct extends StatelessWidget{
 
 
   final NewProductController c = Get.put(NewProductController());
-
 
 
   @override
@@ -77,6 +77,36 @@ class NewProduct extends StatelessWidget{
                   const SizedBox(
                     height: 20,
                   ),
+                  Obx(()=>SizedBox(
+                    width: double.infinity,
+                    child: DropdownButton(
+                      value: c.selectedValue.value,
+                      //icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.grey),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.teal,
+                      ),
+                      onChanged: (value){
+                        if(value=="1"){
+                          c.onChange();
+                        }else{
+                          c.onChanged(value.toString());
+                          c.onChangeFalse();
+                        }
+                      },
+                      items: c.categories.value.map((document) {
+                        return DropdownMenuItem<int>(
+                          value: document.id,
+                          child: Text( document.title.toString()),
+                        );
+                      }).toList(),
+                    ),
+                  ),),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   InkWell(
                     onTap: ()async{
                           c.add();
@@ -92,6 +122,11 @@ class NewProduct extends StatelessWidget{
 
                     ),
                   ),
+                  SizedBox(height: 32,),
+                  SizedBox(
+                                      width: double.infinity,
+                                      child: Obx(()=>( c.isError.value ) ? Text('Error Slecting Category' , style: TextStyle(color: Colors.red),) : Container())
+                                    ),
                 ],
               )
           ),
