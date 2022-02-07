@@ -4,6 +4,7 @@ import 'package:crud_flutter/provider/category_provider.dart';
 import 'package:crud_flutter/provider/products_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewProductController extends GetxController {
 
@@ -16,7 +17,21 @@ class NewProductController extends GetxController {
    var categories= [].obs;
   var isError=false.obs;
   var selectedValue=1.obs;
+  var selectedImageSource = false.obs;
+  var selectedImagePath=''.obs;
+  var selectedImageSize=''.obs;
 
+  void selectTypeImage() {
+    selectedImageSource.value=!selectedImageSource.value;
+  }
+
+  Future<void> getImage (ImageSource imageSource) async {
+
+    final pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if(pickedFile !=null){
+      selectedImagePath.value=pickedFile.path;
+    }
+  }
 
   @override
   void onInit() async {
@@ -61,6 +76,8 @@ class NewProductController extends GetxController {
   onChanged(String value) async {
     selectedValue.value=int.parse(value);
   }
+
+
 
 
 

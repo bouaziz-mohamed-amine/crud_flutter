@@ -25,7 +25,7 @@ class CategoriesPage extends StatelessWidget {
             bottom: true,
             child: Column(
               children: [
-                  Obx(()=>Container(
+                Obx(()=>Container(
                     decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10))
                     ),
@@ -49,6 +49,7 @@ class CategoriesPage extends StatelessWidget {
                     child: Container(
                       color: Colors.grey.shade100,
                       child: Obx(()=>ListView.builder(
+                          controller: controller.scrollcontroller,
                           itemCount: controller.products.length,
                           itemBuilder: (BuildContext context, int index) =>
                               Container(
@@ -134,33 +135,33 @@ class CategoriesPage extends StatelessWidget {
                                 ),
                               ))),
                     )),
-
-                Container(
+                Obx(()=> Container(
                   color: Colors.blue,
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height*0.08,
                   child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.last_page.value,
-                        itemBuilder:(BuildContext context, int index)=>Padding(
-                          padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*0.01,horizontal: 10),
-                          child: InkWell(
-                            onTap: (){
-                              controller.fetchAllProducts(index+1);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.blue.shade700,
-                                border: Border.all(width: 0.5,color: Colors.blue.shade500),
-                                borderRadius: BorderRadius.all(Radius.circular(5))
-                              ),
-                              width: MediaQuery.of(context).size.height*0.06,
-                              child: Center(child: Text((index+1).toString(),textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 20),)),
-                              ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.last_page.value,
+                    itemBuilder:(BuildContext context, int index)=>Padding(
+                      padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*0.01,horizontal: 10),
+                      child: InkWell(
+                        onTap: (){
+                          controller.fetchAllProducts(index+1);
+                          controller.changeCurrentPage(index+1);
+                        },
+                        child: Obx(()=>Container(
+                          decoration: BoxDecoration(
+                              color: controller.current_page.value==index+1?Colors.blue.shade400:Colors.blue.shade700,
+                              border: controller.current_page.value==index+1?Border.all(width: 1,color: Colors.white):Border.all(width: 0.5,color: Colors.blue.shade500),
+                              borderRadius: BorderRadius.all(Radius.circular(5))
                           ),
-                          ),
-                        ),
-                      )
+                          width: MediaQuery.of(context).size.height*0.06,
+                          child: Center(child: Text((index+1).toString(),textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 20),)),
+                        )),
+                      ),
+                    ),
+                  ),
+                ) )
               ],
             ),
           ),

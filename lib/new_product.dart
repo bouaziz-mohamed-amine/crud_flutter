@@ -1,8 +1,12 @@
+
+import 'dart:io';
+
 import 'package:crud_flutter/controller/new_product_controller.dart';
 import 'package:crud_flutter/controller/productscontroller.dart';
 import 'package:crud_flutter/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 class NewProduct extends StatelessWidget{
 
 
@@ -107,6 +111,10 @@ class NewProduct extends StatelessWidget{
                   const SizedBox(
                     height: 20,
                   ),
+                  _selectImage(),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   InkWell(
                     onTap: ()async{
                           c.add();
@@ -134,5 +142,38 @@ class NewProduct extends StatelessWidget{
       ),
     );
   }
+
+ Widget _selectImage() {
+    return Container(
+      child: Obx(()=> c.selectedImageSource.value?
+      Column(
+        children: [
+          RaisedButton(
+              child: Text("camera"),
+              onPressed:(){
+                c.getImage(ImageSource.camera);
+              } ),
+          RaisedButton(
+              child: Text("Gallery"),
+              onPressed:(){
+                c.getImage(ImageSource.gallery);
+              } ),
+          Container(
+            width: double.maxFinite,
+            height: 100,
+            child: Obx(() => c.selectedImagePath.value==''?
+            Text("no image"):Image(
+                fit: BoxFit.cover,
+                image: FileImage(File(c.selectedImagePath.value))
+            )
+            ),
+          )
+        ],
+      ):
+      RaisedButton(
+          child: Text("select image"),
+          onPressed: c.selectTypeImage)),
+    );
+ }
 }
 

@@ -11,6 +11,8 @@ class CategoriesController extends GetxController{
   var categories=[].obs;
   var last_page=0.obs;
   var current_page=1.obs;
+
+  var scrollcontroller = ScrollController();
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -18,6 +20,7 @@ class CategoriesController extends GetxController{
     await fetchAllProducts(current_page.value);
     await fetchAllCategories();
     //print(categories.value.length.toString());
+    scrollcontroller.addListener(pagination);
     super.onInit();
   }
 
@@ -43,4 +46,21 @@ class CategoriesController extends GetxController{
     products.value= await categoryProvider.getProductsByCategory(value);
   }
 
+
+  void pagination() {
+    // if (scrollController.position.pixels == scrollController.position.maxScrollExtent){
+    //
+    // }
+    scrollcontroller.addListener(() {
+      if(scrollcontroller.position.maxScrollExtent==scrollcontroller.position.pixels){
+        current_page.value++ ;
+        update();
+      }
+    });
+
+    }
+
+  void changeCurrentPage(int i) {
+    current_page.value= i ;
+  }
 }
