@@ -128,6 +128,23 @@ class NewProduct extends StatelessWidget{
 
                       child: const Text('Add Product',style: TextStyle(color: Colors.white),),
 
+
+                    ),
+                  ),
+                  InkWell(
+                    onTap: ()async{
+                      c.addImage();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      decoration: const BoxDecoration(
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.only(topRight:Radius.circular(20),bottomLeft: Radius.circular(20)),
+                      ),
+
+                      child: const Text('Add image',style: TextStyle(color: Colors.white),),
+
+
                     ),
                   ),
                   SizedBox(height: 32,),
@@ -160,10 +177,10 @@ class NewProduct extends StatelessWidget{
               } ),
           Container(
             width: double.maxFinite,
-            height: 100,
+            height: 300,
             child: Obx(() => c.selectedImagePath.value==''?
             Text("no image"):Image(
-                fit: BoxFit.cover,
+                fit: BoxFit.fitHeight,
                 image: FileImage(File(c.selectedImagePath.value))
             )
             ),

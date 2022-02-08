@@ -97,7 +97,7 @@ class ListProducts extends StatelessWidget {
                                               0.2,
                                       child: Image(
                                         image: NetworkImage(
-                                            "http://192.168.1.2/storage/images/products/1644220294polo-7-14-essence-5-cv-4-cylindre_used_01544178842.jpeg"),
+                                            "http://192.168.1.3/storage/images/products/1644220294polo-7-14-essence-5-cv-4-cylindre_used_01544178842.jpeg"),
                                         fit: BoxFit.fill,
                                       ),
                                     ),

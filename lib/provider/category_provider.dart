@@ -7,7 +7,7 @@ class CategoryProvider extends GetConnect {
   
   Future<List<Category>> getAllCategories()async{
     List<Category> categories=[];
-    var response = await get('http://192.168.1.2/api/categories');
+    var response = await get('http://192.168.1.3/api/categories');
     if(response.status.hasError){
       return Future.error(response.status);
     } else {
@@ -21,7 +21,7 @@ class CategoryProvider extends GetConnect {
 
   Future<List<Product>> getProductsByCategory(String id) async {
     List<Product> products = [];
-    final response = await get("http://192.168.1.2/api/products/categories/$id");
+    final response = await get("http://192.168.1.3/api/products/categories/$id");
     if(response.status.hasError){
       return Future.error(response.status);
     } else {

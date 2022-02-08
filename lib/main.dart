@@ -10,7 +10,7 @@ void main() {
   runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/newproduct',
+        initialRoute: '/',
         unknownRoute: GetPage(name: '/notfound', page: () => ListProducts() ),
         getPages: [
           GetPage(name: '/', page: () => ListProducts()),
