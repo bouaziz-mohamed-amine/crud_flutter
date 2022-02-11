@@ -7,7 +7,8 @@ class ProductController extends GetxController {
   var product =Product().obs;
   ProductProvider productProvider=ProductProvider();
    var id=Get.parameters['id'];
-
+  // silver app bar
+  RxBool pinned=false.obs;
   @override
   void onInit() async {
     await getProduct(id!);
@@ -17,5 +18,9 @@ class ProductController extends GetxController {
   Future<void> getProduct(String id) async {
     var data=await productProvider.getProduct(id) as Product ;
     product.value=data;
+  }
+  void onChangePinned() {
+    pinned.value= pinned.value ? false : true;
+    print(pinned.value.toString());
   }
 }

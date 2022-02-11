@@ -3,6 +3,7 @@ import 'package:crud_flutter/edit_product.dart';
 import 'package:crud_flutter/list_products.dart';
 import 'package:crud_flutter/new_product.dart';
 import 'package:crud_flutter/product_profile.dart';
+import 'package:crud_flutter/views/login-page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +11,7 @@ void main() {
   runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/login',
         unknownRoute: GetPage(name: '/notfound', page: () => ListProducts() ),
         getPages: [
           GetPage(name: '/', page: () => ListProducts()),
@@ -18,7 +19,10 @@ void main() {
           GetPage(name: '/product/:id', page: () => ProductProfile()),
           GetPage(name: '/editproduct/:id', page: () => EditProduct()),
           GetPage(name: '/categories', page: () => CategoriesPage()),
+          GetPage(name: '/login', page: () => LoginPage()),
         ],
       )
   );
 }
+
+

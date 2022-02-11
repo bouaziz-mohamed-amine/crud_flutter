@@ -38,6 +38,21 @@ class DrawerPage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 25,
+          ),
+          Container(
+            color: Colors.blue.shade100,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: ListTile(
+                title: Text("LOGIN"),
+                trailing: IconButton(
+                    onPressed: () => Get.toNamed("/login"),
+                    icon: Icon(Icons.add)),
+              ),
+            ),
+          ),
         ],
       ),
     );

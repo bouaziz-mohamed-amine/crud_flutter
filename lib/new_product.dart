@@ -125,26 +125,7 @@ class NewProduct extends StatelessWidget{
                         color: Colors.teal,
                         borderRadius: BorderRadius.only(topRight:Radius.circular(20),bottomLeft: Radius.circular(20)),
                       ),
-
                       child: const Text('Add Product',style: TextStyle(color: Colors.white),),
-
-
-                    ),
-                  ),
-                  InkWell(
-                    onTap: ()async{
-                      c.addImage();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: const BoxDecoration(
-                        color: Colors.teal,
-                        borderRadius: BorderRadius.only(topRight:Radius.circular(20),bottomLeft: Radius.circular(20)),
-                      ),
-
-                      child: const Text('Add image',style: TextStyle(color: Colors.white),),
-
-
                     ),
                   ),
                   SizedBox(height: 32,),
