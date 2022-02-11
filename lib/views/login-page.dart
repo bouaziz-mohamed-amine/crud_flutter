@@ -12,14 +12,12 @@ class LoginPage extends StatelessWidget {
         title: Text("LOGIN"),
         centerTitle: true,
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            _form()
-          ],
-        ),
+      body: SingleChildScrollView(
+        child:  Column(
+            children: [
+              _form()
+            ],
+          ),
     ),
     );
   }
@@ -36,26 +34,32 @@ class LoginPage extends StatelessWidget {
         key: controller.formKey,
           child: Column(
             children: [
-                   TextField(
-                     keyboardType: TextInputType.emailAddress,
-                     controller: controller.userEmailController,
-                     decoration: InputDecoration(
-                       prefixIcon: Icon(Icons.email ,color: Colors.teal),
-                       suffixIcon: Icon(Icons.edit,color: Colors.teal,),
-                       focusColor: Colors.red,
-                       labelText: "Your Email",
-                       hintText: "email...",
-                       enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal,width: 2)),
-                       focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 2),),
-                       //fillColor: Colors.blue
-                     ),
-                   ),
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                controller: controller.userEmailController,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.email ,color: Colors.teal),
+                  suffixIcon: Icon(Icons.edit,color: Colors.teal,),
+                  focusColor: Colors.red,
+                  labelText: "Your Email",
+                  hintText: "email...",
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal,width: 2)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 2),),
+                  //fillColor: Colors.blue
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
               const SizedBox(
                 height: 30,
               ),
                Obx(()=>
-                   TextField(
-                     //keyboardType: TextInputType.visiblePassword,
+                   TextFormField(
+                     // The validator receives the text that the user has entered.
                      controller: controller.userPasswordController,
                      obscureText: controller.obscurePassword.value,
                      decoration: InputDecoration(
@@ -64,27 +68,34 @@ class LoginPage extends StatelessWidget {
                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal,width: 2)),
                        prefixIcon:   Icon(Icons.security,color: Colors.blue),
                        suffixIcon: IconButton(onPressed: (){
-                           controller.changeObscurePassword();
+                         controller.changeObscurePassword();
                        }, icon: controller.obscurePassword.value? Icon(Icons.remove_red_eye_rounded):Icon(Icons.visibility_off)),
                        //suffixIconColor: Colors.red,
 
                      ),
+                     validator: (value) {
+                       if (value == null || value.isEmpty) {
+                         return 'Please enter some text';
+                       }
+                       return null;
+                     },
                    ),
                ),
+
               const SizedBox(
                 height: 30,
               ),
-              MaterialButton(
-                  height: 50,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  color: Colors.teal,
-                  child: Text("LOGIN",style: TextStyle(color: Colors.white),),
-                  splashColor: Colors.teal.shade700,
-                  onPressed: (){
-                    controller.login();
-                  }
+                  MaterialButton(
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      color: Colors.teal,
+                      child: Text("LOGIN",style: TextStyle(color: Colors.white),),
+                      splashColor: Colors.teal.shade700,
+                      onPressed: (){
+                        controller.login();
+                      }
                   ),
             ],
           )),

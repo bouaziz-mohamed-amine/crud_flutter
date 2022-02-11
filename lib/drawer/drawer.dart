@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 class DrawerPage extends StatelessWidget {
-  const DrawerPage({Key? key}) : super(key: key);
 
+  final data=GetStorage();
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Container(
@@ -23,7 +24,7 @@ class DrawerPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Container(
@@ -34,14 +35,14 @@ class DrawerPage extends StatelessWidget {
                 title: Text("all categories"),
                 trailing: IconButton(
                     onPressed: () => Get.toNamed("/categories"),
-                    icon: Icon(Icons.add)),
+                    icon: Icon(Icons.category)),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
-          Container(
+          (data.read("name")==null) ?Container(
             color: Colors.blue.shade100,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -49,10 +50,22 @@ class DrawerPage extends StatelessWidget {
                 title: Text("LOGIN"),
                 trailing: IconButton(
                     onPressed: () => Get.toNamed("/login"),
-                    icon: Icon(Icons.add)),
+                    icon: Icon(Icons.login)),
               ),
             ),
+          ):Container(
+            color: Colors.blue.shade100,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child:  ListTile(
+                title: Text("LOG OUT"),
+                trailing: IconButton(
+                    onPressed: () => data.remove("name"),
+                    icon: Icon(Icons.logout)
+                ),
+            ),
           ),
+          )
         ],
       ),
     );
