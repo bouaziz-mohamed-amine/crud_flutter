@@ -76,21 +76,16 @@ class NewProductController extends GetxController {
       });
       //Product product= Product(title: title,description:desc,price:price,image: selectedImagePath.value,category_id: category_id);
       //Map<String, dynamic> newproduct=product.toJson();
-      await productProvider.addProduct(form);
-
-
-      //Get.offAllNamed("/");
-
+        await productProvider.addProduct(form);
+         Get.offAndToNamed("/");
     }
   }
-
   onChange() {
     isError.value=true;
   }
   onChangeFalse(){
     isError.value=false;
   }
-
   onChanged(String value) async {
     selectedValue.value=int.parse(value);
   }

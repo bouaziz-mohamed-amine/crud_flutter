@@ -32,10 +32,10 @@ class LoginController extends GetxController{
 
   void login() async {
     if (formKey.currentState!.validate()) {
-      var  user= await userProvider.login(userEmailController.text,userPasswordController.text);
-      if(user.name != ""){
-        await data.write("name", user.name);
-        Get.offAndToNamed("/");
+      await userProvider.login(userEmailController.text,userPasswordController.text);
+      // if(user.name != ""){
+      // await data.write("name", user.name);
+        //Get.offAndToNamed("/");
         //print(data.read("name").toString()+"bo3");
       }
 
@@ -49,8 +49,6 @@ class LoginController extends GetxController{
         //print("name"+user.name.toString());
    //   }
     //print(userEmailController.text.toString()+"-"+userPasswordController.text);
-  }
-
   void changeObscurePassword() {
     obscurePassword.value=  obscurePassword.value? false:true;
   }

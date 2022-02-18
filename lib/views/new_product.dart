@@ -131,7 +131,7 @@ class NewProduct extends StatelessWidget{
                   SizedBox(height: 32,),
                   SizedBox(
                                       width: double.infinity,
-                                      child: Obx(()=>( c.isError.value ) ? Text('Error Slecting Category' , style: TextStyle(color: Colors.red),) : Container())
+                                      child: Obx(()=>( c.isError.value ) ? Text('Error Slecting ' , style: TextStyle(color: Colors.red),) : Container())
                                     ),
                 ],
               )

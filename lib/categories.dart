@@ -56,79 +56,107 @@ class CategoriesPage extends StatelessWidget {
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(10),
                                 child: Card(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Container(
-                                          //color: Colors.red,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  width: double.maxFinite,
-                                                  child: Text(
-                                                    controller
-                                                        .products[index].title
-                                                        .toString(),
-                                                    textAlign: TextAlign.center,
-                                                  )),
-                                              Container(
-                                                  width: double.maxFinite,
-                                                  //color: Colors.green,
-                                                  child: Text(
-                                                    controller
-                                                        .products[index].price
-                                                        .toString(),
-                                                    textAlign: TextAlign.center,
-                                                  )),
-                                              //Text(controller.products[index].id.toString()),
-                                            ],
+                                      Container(
+                                        //padding: EdgeInsets.symmetric(vertical: 10),
+                                          height: 25,
+                                          width: double.maxFinite,
+                                          child: Center(
+                                            child: Padding(
+                                              padding: const EdgeInsets
+                                                  .only(top: 8.0),
+                                              child: Text(
+                                                controller.products[index]
+                                                    .title
+                                                    .toString(),
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight
+                                                        .bold,
+                                                    fontSize: 15),
+                                              ),
+                                            ),
+                                          )),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+                                        child: SizedBox(
+                                          width: double.maxFinite,
+                                          height:
+                                          MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height *
+                                              0.2,
+                                          child: Image(
+                                            image: NetworkImage(
+                                                'http://192.168.1.2/storage/images/products/${controller.products[index].image}'),
+                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        //color: Colors.amberAccent,
-                                        child: Row(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  int id = controller
-                                                      .products[index].id;
-                                                  Get.toNamed('/product/$id');
-                                                },
-                                                iconSize: 25,
-                                                color: Colors.blue,
-                                                icon: const Icon(
-                                                    Icons.show_chart)),
-                                            IconButton(
-                                                onPressed: () {
-                                                  int id = controller
-                                                      .products[index].id;
-                                                  Get.toNamed(
-                                                      '/editproduct/$id');
-                                                },
-                                                iconSize: 25,
-                                                color: Colors.green,
-                                                icon: Icon(Icons.edit)),
-                                            InkWell(
-                                              onTap: () {
-                                                controller.deleleProduct(
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                IconButton(
+                                                    onPressed: () {
+                                                      int id = controller
+                                                          .products[index]
+                                                          .id;
+                                                      Get.toNamed(
+                                                          '/product/$id');
+                                                    },
+                                                    iconSize: 25,
+                                                    color: Colors.blue,
+                                                    icon: const Icon(
+                                                        Icons.show_chart)),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      int id = controller
+                                                          .products[index]
+                                                          .id;
+                                                      Get.toNamed(
+                                                          '/editproduct/$id');
+                                                    },
+                                                    iconSize: 25,
+                                                    color: Colors.green,
+                                                    icon: Icon(Icons.edit)),
+                                                InkWell(
+                                                  onTap: () {
                                                     controller
-                                                        .products[index].id);
-                                              },
-                                              child: const Icon(
-                                                Icons.delete,
-                                                size: 25,
-                                                color: Colors.red,
-                                              ),
+                                                        .deleleProduct(
+                                                        controller
+                                                            .products[index]
+                                                            .id);
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.delete,
+                                                    size: 25,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                                width: double.maxFinite,
+                                                child: Text(
+                                                  controller
+                                                      .products[index].price
+                                                      .toString() + " " +
+                                                      "DT",
+                                                  textAlign: TextAlign
+                                                      .center,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .bold),
+                                                )),)
+                                        ],
                                       )
                                     ],
                                   ),

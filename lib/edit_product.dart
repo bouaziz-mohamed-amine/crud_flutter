@@ -81,9 +81,7 @@ class EditProduct extends StatelessWidget {
                       padding: EdgeInsets.all(16),
                       decoration: const BoxDecoration(
                         color: Colors.teal,
-
                       ),
-
                       child: const Text('Edit Product',style: TextStyle(color: Colors.white),),
 
                     ),

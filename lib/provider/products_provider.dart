@@ -1,22 +1,22 @@
 import 'package:crud_flutter/models/product.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProductProvider extends GetConnect{
 
-
+  final box=GetStorage();
   Future<Product> getProduct(String id) async{
-    final response = await get("http://192.168.1.3/api/products/$id");
+    final response = await get("http://192.168.1.2/api/public/products/$id");
     if(response.status.hasError){
       return Future.error(response.status);
     } else {
-      print(response.body.toString());
-      return Product.fromJson(response.body);
+      return Product.fromJson(response.body["data"]);
     }
   }
   Future<Map<String,dynamic>> getAllProducts(int page) async {
     List<Product> products = [];
     int total;
-    final response = await get("http://192.168.1.3/api/products?page=$page");
+    final response = await get("http://192.168.1.2/api/public/products?page=$page");
     if(response.status.hasError){
       return Future.error(response.status);
     } else {
@@ -30,25 +30,35 @@ class ProductProvider extends GetConnect{
 
 
   Future<void> deleteProduct(int id) async {
-     final response = await delete("http://192.168.1.3/api/products/$id");
+    Map<String,String> headers={
+      "Authorization" : "Bearer ${box.read("token")}"
+    };
+     final response = await delete("http://192.168.1.2/api/products/$id",headers: headers);
      if(response.hasError){
-       print("none");
+       print(response.statusCode);
      }else {
        print("done");
      }
   }
-  Future<void> addProduct(FormData form) async{
-    final response = await post("http://192.168.1.3/api/products",form);
+  Future<int?> addProduct(FormData form) async{
+    Map<String,String> headers={
+      "Authorization" : "Bearer ${box.read("token")}"
+    };
+    final response = await post("http://192.168.1.2/api/products",form,headers: headers);
     if(response.status.hasError){
-      return Future.error(response.status);
+      print(response.statusCode);
+      return 404;
     } else {
-      print(response.body.toString());
+      return response.statusCode;
       //return Product.fromJson(response.body);
     }
   }
 
   editProduct(String id,Map<String, dynamic> newproduct) async{
-    final response = await put("http://192.168.1.3/api/products/$id",newproduct);
+    Map<String,String> headers={
+      "Authorization" : "Bearer ${box.read("token")}"
+    };
+    final response = await put("http://192.168.1.2/api/products/$id",newproduct,headers: headers);
     if(response.status.hasError){
       return Future.error(response.status);
     } else {
@@ -59,7 +69,7 @@ class ProductProvider extends GetConnect{
 
   Future<List<Product>> getAllProductsByName(String name) async {
     List<Product> products = [];
-    final response = await get("http://192.168.1.3/api/products/name/$name");
+    final response = await get("http://192.168.1.2/api/public/products/name/$name");
     if(response.status.hasError){
       return Future.error(response.status);
     } else {
@@ -71,7 +81,7 @@ class ProductProvider extends GetConnect{
   }
 
   addNewProduct(FormData form) async {
-    final response = await post("http://192.168.1.3/api/products",form);
+    final response = await post("http://192.168.1.2/api/products",form);
     if(response.status.hasError){
       return Future.error(response.status);
     } else {

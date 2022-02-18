@@ -32,7 +32,7 @@ class EditProductController extends GetxController {
       int price= int.parse(productPriceController.text)  ;
       String desc= productDescriptionController.text;
       String title=productTitleController.text;
-      Product product= Product(title: title,description:desc,price:price,image: "url");
+      Product product= Product(title: title,description:desc,price:price);
       Map<String, dynamic> newproduct=product.toJson();
       await productProvider.editProduct(id,newproduct);
       Get.offAllNamed("/");

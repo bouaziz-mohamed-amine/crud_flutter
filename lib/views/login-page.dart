@@ -24,9 +24,9 @@ class LoginPage extends StatelessWidget {
 
  Widget _form() {
     return Container(
-      padding: EdgeInsets.only(top: 15, bottom: 15,left: 15,right: 15),
-      margin: EdgeInsets.only(left: 10,right: 10,top: 30),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.only(top: 15, bottom: 15,left: 15,right: 15),
+      margin: const EdgeInsets.only(left: 10,right: 10,top: 30),
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(5))
       ),
@@ -37,15 +37,15 @@ class LoginPage extends StatelessWidget {
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 controller: controller.userEmailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email ,color: Colors.teal),
                   suffixIcon: Icon(Icons.edit,color: Colors.teal,),
                   focusColor: Colors.red,
                   labelText: "Your Email",
                   hintText: "email...",
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal,width: 2)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 2),),
-                  //fillColor: Colors.blue
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal,width: 2),),
+                  fillColor: Colors.red
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

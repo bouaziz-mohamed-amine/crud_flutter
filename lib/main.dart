@@ -1,8 +1,8 @@
 import 'package:crud_flutter/categories.dart';
 import 'package:crud_flutter/edit_product.dart';
-import 'package:crud_flutter/list_products.dart';
-import 'package:crud_flutter/new_product.dart';
-import 'package:crud_flutter/product_profile.dart';
+import 'package:crud_flutter/views/list_products.dart';
+import 'package:crud_flutter/views/new_product.dart';
+import 'package:crud_flutter/views/product_profile.dart';
 import 'package:crud_flutter/views/login-page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

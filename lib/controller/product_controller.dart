@@ -16,7 +16,7 @@ class ProductController extends GetxController {
   }
 
   Future<void> getProduct(String id) async {
-    var data=await productProvider.getProduct(id) as Product ;
+    var data=await productProvider.getProduct(id) ;
     product.value=data;
   }
   void onChangePinned() {
